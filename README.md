@@ -1,14 +1,56 @@
 # Name of exercise
 
-Add basic setup here.
+You work at a big summer camp - one that has it's own IT department.  The scheduling department has a program that
+generates arrays of activities that campers should attend, like this:
+
+```json
+{
+  "john": ["swimming", "swimming", "archery", "archery", "boating", "crafts"],
+  "jane": ["archery", "swimming", "crafts", "archery", "boating", "crafts"]
+]
+```
+
+The scheduling software is pretty terrible, and doesn't follow the camp's main rule, which is:
+
+* Campers must do each activity at least twice in a row (to minimize the transition time)
+
+Your mission, should you choose to accept it, is to come up with a schedule validator.  When given a hash of arrays,
+it should find all rule violations, and produce a hash of arrays of violations.
+
+It's OK that campers repeat activities more than twice.
 
 ## Examples
 
-Show concrete examples
+Given the following input:
+
+```json
+{
+  "john": ["swimming", "swimming", "archery", "archery", "boating", "crafts"],
+  "jane": ["archery", "swimming", "crafts", "archery", "archery", "crafts"]
+]
+```
+
+Your code should produce the following report:
+
+```json
+{
+  "john": ["Has a non-consecutive activity - boating - at position 5"],
+  "jane": [
+    "Has a non-consecutive activity - archery - at position 1",
+    "Has a non-consecutive activity - swimming -  at position 2",
+    "Has a non-consecutive activity - crafts -  at position 3",
+    "Has a non-consecutive activity - crafts -  at position 6"
+  ]
+]
+```
 
 # Extra
 
-Add extra challenges here.
+Add more validations that ensure that:
+
+* Campers must have exactly 8 activities every day
+* Campers cannot repeat activities - if they went boating in the morning, they can't go boating again later in the day
+* Campers cannot repeat an activity more than three times
 
 # Setup
 
