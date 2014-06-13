@@ -12,12 +12,10 @@ The scheduling software is pretty terrible, and doesn't follow the camp's rules,
 * Campers must do each activity at least twice in a row (to minimize the transition time)
 * It's OK if the last activity of the camper's day is not repeated
 
-Your mission, should you choose to accept it, is to come up with a schedule validator.  When given a hash of arrays,
-it should find all rule violations, and produce a hash of arrays of violations.
+## Step 1: Determining consecutive elements
 
-## Determining consecutive elements
-
-You need to produce an array of all the activities, along with the number of _consecutive_ times they are in that 
+The first step in validating a schedule is to produce an array of all the activities, along with
+the number of _consecutive_ times they are in that
 activity.
 
 Given the following array `["archery", "swimming", "swimming", "crafts", "archery", "archery", "crafts"]` your code should produce:
@@ -31,6 +29,40 @@ Given the following array `["archery", "swimming", "swimming", "crafts", "archer
     ["crafts", 1],
   ]
 ```
+
+## Step 2: Validating the schedule
+
+Once you have created the above array, you need validate that the array matches the camp's rules.
+
+Given the following input:
+
+```ruby
+  [
+    ["archery", 1],
+    ["swimming", 2],
+    ["crafts", 1],
+    ["archery", 2],
+    ["crafts", 1],
+  ]
+```
+
+your method will return false.
+
+Given the following input:
+
+```ruby
+  [
+    ["archery", 2],
+    ["swimming", 2],
+    ["archery", 2],
+    ["crafts", 1],
+  ]
+```
+
+your method will return true.
+
+There is one more case that you will need to define to make sure the validation code is complete.
+Can you figure out what it is?
 
 # Setup
 
