@@ -4,53 +4,33 @@ You work at a big summer camp - one that has it's own IT department.  The schedu
 generates arrays of activities that campers should attend, like this:
 
 ```json
-{
-  "john": ["swimming", "swimming", "archery", "archery", "boating", "crafts"],
-  "jane": ["archery", "swimming", "crafts", "archery", "boating", "crafts"]
-]
+["archery", "swimming", "crafts", "archery", "archery", "crafts"]
 ```
 
-The scheduling software is pretty terrible, and doesn't follow the camp's main rule, which is:
+The scheduling software is pretty terrible, and doesn't follow the camp's rules, which are:
 
 * Campers must do each activity at least twice in a row (to minimize the transition time)
+* It's OK if the last activity of the camper's day is not repeated
 
 Your mission, should you choose to accept it, is to come up with a schedule validator.  When given a hash of arrays,
 it should find all rule violations, and produce a hash of arrays of violations.
 
-It's OK that campers repeat activities more than twice.
+## Determining consecutive elements
 
-## Examples
+You need to produce an array of all the activities, along with the number of _consecutive_ times they are in that 
+activity.
 
-Given the following input:
+Given the following array `["archery", "swimming", "swimming", "crafts", "archery", "archery", "crafts"]` your code should produce:
 
-```json
-{
-  "john": ["swimming", "swimming", "archery", "archery", "boating", "crafts"],
-  "jane": ["archery", "swimming", "crafts", "archery", "archery", "crafts"]
-]
-```
-
-Your code should produce the following report:
-
-```json
-{
-  "john": ["Has a non-consecutive activity - boating - at position 5"],
-  "jane": [
-    "Has a non-consecutive activity - archery - at position 1",
-    "Has a non-consecutive activity - swimming -  at position 2",
-    "Has a non-consecutive activity - crafts -  at position 3",
-    "Has a non-consecutive activity - crafts -  at position 6"
+```ruby
+  [
+    ["archery", 1],
+    ["swimming", 2],
+    ["crafts", 1],
+    ["archery", 2],
+    ["crafts", 1],
   ]
-]
 ```
-
-# Extra
-
-Add more validations that ensure that:
-
-* Campers must have exactly 8 activities every day
-* Campers cannot repeat activities - if they went boating in the morning, they can't go boating again later in the day
-* Campers cannot repeat an activity more than three times
 
 # Setup
 
